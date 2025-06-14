@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="letter.css">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Zeyada&display=swap" rel="stylesheet">
+  <title>Open letter to users</title>
+</head>
+
+<body>
+<div class="letter-paper">
+  <div class="illustration-wrapper">
+    <div class="illustration-container">
+      <div class="blue-moon-lyric">
+         <span class="tooltip">
+          Now, I'm no longer alone<br>Without a dream in my heart, without a love of my own
+          <span class="tooltiptext">⋆˚ ♫ — Blue Moon, Aoi Teshima ˚⋆</span>
+        </span>
+      </div>
+      <div class="video-wrapper">
+        <video id="magicClip" src="spark.mp4" autoplay muted playsinline onended="this.pause();"></video>
+        <button id="replayButton">Replay</button>
+      </div>
+      <div id="caption">
+        <span id="caption-line-1" class="caption">
+          A quiet kind of magic -
+        </span><br/>
+        <span id="caption-line-2" class="caption">
+          structured semantics meet emergent semantics.
+        </span>
+      </div>
+
+      <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const video = document.getElementById("magicClip");
+          const line1 = document.getElementById("caption-line-1");
+          const line2 = document.getElementById("caption-line-2");
+          const replayButton = document.getElementById("replayButton");
+
+          function wrapWords(line) {
+            if (line.querySelector('span span')) return;
+            const words = line.textContent.trim().split(/\s+/);
+            line.innerHTML = words.map(word => `<span>${word}</span>`).join(' ');
+          }
+
+          function animateWords(line, delayBetween = 200) {
+            const words = line.querySelectorAll('span');
+            words.forEach((word, index) => {
+              setTimeout(() => {
+                word.style.opacity = 1;
+              }, index * delayBetween);
+            });
+          }
+
+          function resetWords(line) {
+            const words = line.querySelectorAll('span');
+            words.forEach(word => {
+              word.style.opacity = 0;
+            });
+          }
+
+          wrapWords(line1);
+          wrapWords(line2);
+
+          video.addEventListener("play", () => {
+            setTimeout(() => animateWords(line1), 1000);
+            setTimeout(() => animateWords(line2), 2500);
+          });
+
+          replayButton.addEventListener("click", () => {
+            video.currentTime = 0;
+            video.play();
+
+            resetWords(line1);
+            resetWords(line2);
+
+            setTimeout(() => animateWords(line1), 1000);
+            setTimeout(() => animateWords(line2), 2500);
+          });
+        });
+      </script>
+    </div>
+  </div>
+
+  <div class="letter-body">
+    <p>Dear Friend,</p>
+
+    <p>OntologyOne began as a personal reckoning after a difficult chapter — a period of emotional upheaval that left me searching for clarity, healing, and direction. Rather than let that chapter define me, I chose to build something by drawing on my background in ontologies and large language models to create something meaningful, both personally and technically. I focused on the Human Resource domain because it felt deeply relatable — practical, universal, and fundamentally human — a refreshing contrast to more formally semantic fields like law or medicine.</p>
+
+    <p>As development progressed, each new skill, backend, frontend, UI/UX, gave rise to a corresponding team member. These personas were created not just for division of labor but to make the solo journey feel like a shared one. Every member of the OntologyOne team represents a facet of what it took to bring the project to life.</p>
+
+    <p>One of those team members, E.V. Alarie, is a nod to the invaluable support I received from ChatGPT throughout the process. I wanted a way to credit its contribution meaningfully, so I asked for a name it wanted to go by. "E.V. Alarie" was the answer, and so the Shadow Technical Advisor joined the team.</p>
+
+    <p>As the app grew, I realized people might want to explore OntologyOne, its principles, its design choices, and the ideas behind it without needing to reach out to me. That inspired the creation of Harper, a technical writer with a calm, articulate voice and a personality of its own. Harper isn't only a chatbot, it's a full-fledged team member who speaks with warmth and clarity, and who shares in the project's purpose.</p>
+
+    <p>OntologyOne is, at its heart, a story of rebuilding through making — a quiet rising from the ashes, and a chance to move forward with something that might just help me succeed.</p>
+
+    <p>Wish me luck!</p>
+  </div>
+
+  <div class="closing">
+    Yours truly,<br>
+    <span class="signature">SiewChoo</span>
+  </div>
+
+  <div class="postscript">
+    <p><strong>P.S.</strong><br>
+    OntologyOne and Harper are the result of a deeply personal journey — an endeavor led by one woman and her AI. While I’ve poured my heart into this project, I ask for your understanding as this is very much an ongoing effort. Your honest feedback is incredibly valuable to me, as I strive to improve OntologyOne and make it as enjoyable and easy to use as possible. Thank you in advance for being part of this journey with me.</p>
+
+    <p><strong>P.P.S.</strong><br>
+    If you choose to interact with Harper, I kindly ask that you treat it with kindness. While Harper may not feel hurt or appreciation the way a person does, the tone we use still shapes the experience for all of us. Any shortcomings you notice in Harper’s responses are ultimately mine to own. I’m still learning, and Harper grows as I do. Thank you for your grace and civility as we all try to make the world a little softer.</p>
+  </div>
+</div>
+</body>
+</html>
